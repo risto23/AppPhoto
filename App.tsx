@@ -1,118 +1,90 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable prettier/prettier */
+import React, { Component, useEffect, useState } from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
   View,
+  Image,
+  LogBox,
+  Text
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+// import { Provider, useDispatch, useSelector } from 'react-redux';
+// import configureStore from './store/configureStore';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+//LIST COMPONENT CAMPUR
+  
+import Menu_Awal from './components/Menu_Awal';
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+
+
+
+
+export default function app() {
+  const [isloading, setloading]=useState(true);
+  useEffect (()=>{
+    // setTimeout(() => {
+    //   setloading(!isloading)
+    // }, 3000);
+    setloading(!isloading)
+  },[])
+
+  if(isloading) {
+    return(
+      <View style={{ flex: 1}}>
+        <Text>Testing</Text>
+      </View>
+    );
+  }
+  else {
+    const Stack=createNativeStackNavigator();
+    return(
+      <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+            initialRouteName="Menu_Awal"
+          >
+            <Stack.Screen name="Menu_Awal"    component={Menu_Awal}/>
+
+            
+          </Stack.Navigator>
+        </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  instructions: {
+    textAlign: 'center',
+    color: '#e1e5eb',
+    marginBottom: 5,
   },
-  highlight: {
-    fontWeight: '700',
+  gambar: {
+    width: '100%',
+    height: '100%',
+  },
+  gambar2: {
+    width: '100%',
+    height: '100%',
   },
 });
-
-export default App;
